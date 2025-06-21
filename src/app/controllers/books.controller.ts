@@ -1,7 +1,5 @@
-import express, { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { Book } from "../models/book.model";
-
-export const booksRoute = express.Router();
 
 export const createBook = async (
   req: Request,
@@ -113,9 +111,9 @@ export const deleteSingleBooks = async (
 ) => {
   try {
     const bookId = req.params.bookId;
-    const data = await Book.deleteOne({ _id: bookId });
+    const data = await Book.findOneAndDelete({ _id: bookId });
 
-    if (data?.deletedCount) {
+    if (data) {
       res.status(200).json({
         success: true,
         message: "Book deleted successfully",

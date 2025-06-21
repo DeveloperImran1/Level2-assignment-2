@@ -1,8 +1,6 @@
-import express, { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { Book } from "../models/book.model";
 import { Borrow } from "../models/borrow.model";
-
-export const borrowRoutes = express.Router();
 
 export const createBorrow = async (
   req: Request,
