@@ -75,19 +75,19 @@ The system exposes two main API categories through specific route patterns:
 [Server Code](https://github.com/DeveloperImran1/Level2-assignment-2)
 
 
-- **Environment Variables:**
+## Environment Variables:
   - Create a `.env` file in the root of your client project and add the following variables:
-    ```plaintext
- - # MongoDB Credentials
-    DB_USER=your_database_user
-    DB_PASS=your_database_password
-    DB_NAME=your_database_name
+
+ <b> MongoDB Credentials <b/> <br /> <br />
+   DB_USER=your_database_user <br />
+   DB_PASS=your_database_password <br />
+   DB_NAME=your_database_name <br />
 
 
-- **Folder Structure:**
+## Folder Structure:
  ![Folder Structure](https://i.postimg.cc/q7QBBt6z/Screenshot-56.png)
 
-## Contributing
 
+## Contributing
 If you'd like to contribute to this project, please fork the repository and use a feature branch. Pull requests are welcome.
 
