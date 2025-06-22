@@ -6,7 +6,7 @@ import {
   getSingleBooks,
   updateSingleBooks,
 } from "./app/controllers/books.controller";
-import { createBorrow, getBorrow } from "./app/controllers/borrows.controller";
+import { getBorrow } from "./app/controllers/borrows.controller";
 import globalErrorHandler from "./app/middlewares/globalErrorHandler";
 
 const app: Application = express();
@@ -22,7 +22,7 @@ router.get("/api/books/:bookId", getSingleBooks);
 router.put("/api/books/:bookId", updateSingleBooks);
 router.delete("/api/books/:bookId", deleteSingleBooks);
 
-router.post("/api/borrow", createBorrow);
+// router.post("/api/borrow", createBorrow);
 router.get("/api/borrow", getBorrow);
 
 app.use(globalErrorHandler);
