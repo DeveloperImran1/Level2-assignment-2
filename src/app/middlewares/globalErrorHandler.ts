@@ -1,7 +1,11 @@
-import { ErrorRequestHandler } from "express";
+import { ErrorRequestHandler, Request, Response } from "express";
 import mongoose from "mongoose";
 
-const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
+const globalErrorHandler: ErrorRequestHandler = (
+  err,
+  req: Request,
+  res: Response
+) => {
   // default error handleer
   const errorResponse = {
     message: "Something went wrong!",

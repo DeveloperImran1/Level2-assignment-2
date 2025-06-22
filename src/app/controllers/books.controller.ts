@@ -15,7 +15,7 @@ export const createBook = async (
       message: "Book created successfully",
       data: book,
     });
-  } catch (error: any) {
+  } catch (error) {
     next(error);
   }
 };

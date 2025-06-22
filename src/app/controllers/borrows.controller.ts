@@ -2,11 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { Book } from "../models/book.model";
 import { Borrow } from "../models/borrow.model";
 
-export const createBorrow = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const createBorrow = async (req: Request, res: Response, next) => {
   try {
     const body = req.body;
     console.log(body);
