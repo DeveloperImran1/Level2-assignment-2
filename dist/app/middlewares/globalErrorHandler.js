@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
-const globalErrorHandler = (err, req, res, next) => {
+const globalErrorHandler = (err, req, res) => {
     // default error handleer
     const errorResponse = {
         message: "Something went wrong!",
@@ -24,6 +24,6 @@ const globalErrorHandler = (err, req, res, next) => {
         errorResponse.message = err.message || "Unknown error occurred";
         errorResponse.error = Object.assign({ name: err.name || "Error" }, err);
     }
-    res.status(400).json(errorResponse);
+    res.status(404).json(errorResponse);
 };
 exports.default = globalErrorHandler;

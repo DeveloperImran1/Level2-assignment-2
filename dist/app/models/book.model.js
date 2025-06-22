@@ -43,9 +43,16 @@ const bookSchema = new mongoose_1.Schema({
     versionKey: false,
     timestamps: true,
 });
+bookSchema.pre("save", function (next) {
+    return __awaiter(this, void 0, void 0, function* () {
+        console.log("This is pre middleware");
+        next();
+    });
+});
 bookSchema.post("findOneAndDelete", function (doc, next) {
     return __awaiter(this, void 0, void 0, function* () {
-        const res = yield borrow_model_1.Borrow.deleteMany({ book: doc._id });
+        yield borrow_model_1.Borrow.deleteMany({ book: doc._id });
+        next();
     });
 });
 exports.Book = (0, mongoose_1.model)("Book", bookSchema);

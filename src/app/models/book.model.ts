@@ -37,8 +37,14 @@ const bookSchema = new Schema<IBook>(
   }
 );
 
+bookSchema.pre("save", async function (next) {
+  console.log("This is pre middleware");
+  next();
+});
+
 bookSchema.post("findOneAndDelete", async function (doc, next) {
-  const res = await Borrow.deleteMany({ book: doc._id });
+  await Borrow.deleteMany({ book: doc._id });
+  next();
 });
 
 export const Book = model("Book", bookSchema);

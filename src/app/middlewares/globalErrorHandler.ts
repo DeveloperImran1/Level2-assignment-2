@@ -28,7 +28,7 @@ const globalErrorHandler: ErrorRequestHandler = (
       ...err,
     };
   }
-  res.status(400).json(errorResponse);
+  res.status(404).json(errorResponse);
 };
 
 export default globalErrorHandler;
