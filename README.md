@@ -4,7 +4,7 @@ This document provides a comprehensive introduction to the Library Management Sy
 
 
 ## Live Site URL
-Visit the live site at [Server Side](https://assignment-3-flax-seven.vercel.app/)
+Visit the live site at [Server Side](https://level2-assignment-2-azure.vercel.app/)
 
 ## System Purpose
 The Library Management System provides a RESTful API for managing library operations including:
