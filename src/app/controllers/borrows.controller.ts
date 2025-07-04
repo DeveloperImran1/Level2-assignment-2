@@ -2,7 +2,11 @@ import { NextFunction, Request, Response } from "express";
 import { Book } from "../models/book.model";
 import { Borrow } from "../models/borrow.model";
 
-export const createBorrow = async (req: Request, res: Response, next) => {
+export const createBorrow = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const body = req.body;
     console.log(body);
@@ -12,7 +16,7 @@ export const createBorrow = async (req: Request, res: Response, next) => {
 
     // checking is book available
     if (!bookData) {
-      return res.status(404).json({
+      res.status(404).json({
         success: false,
         message: `This book is not found`,
         data: null,
@@ -26,14 +30,14 @@ export const createBorrow = async (req: Request, res: Response, next) => {
       if (bookData?.copies >= body?.quantity) {
         data = await Borrow.create(body);
       } else {
-        return res.status(401).json({
+        res.status(401).json({
           success: false,
           message: `Only ${bookData?.copies} book is available`,
           data: null,
         });
       }
     } else {
-      return res.status(401).json({
+      res.status(401).json({
         success: false,
         message: "Book is not available",
         data: null,
@@ -69,6 +73,7 @@ export const getBorrow = async (
           totalQuantity: { $sum: "$quantity" },
         },
       },
+
       {
         $lookup: {
           from: "books",

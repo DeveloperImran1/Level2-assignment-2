@@ -20,7 +20,7 @@ const createBorrow = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
         console.log("bookData", bookData);
         // checking is book available
         if (!bookData) {
-            return res.status(404).json({
+            res.status(404).json({
                 success: false,
                 message: `This book is not found`,
                 data: null,
@@ -33,7 +33,7 @@ const createBorrow = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
                 data = yield borrow_model_1.Borrow.create(body);
             }
             else {
-                return res.status(401).json({
+                res.status(401).json({
                     success: false,
                     message: `Only ${bookData === null || bookData === void 0 ? void 0 : bookData.copies} book is available`,
                     data: null,
@@ -41,7 +41,7 @@ const createBorrow = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
             }
         }
         else {
-            return res.status(401).json({
+            res.status(401).json({
                 success: false,
                 message: "Book is not available",
                 data: null,

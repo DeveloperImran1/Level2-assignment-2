@@ -22,6 +22,13 @@ const createBook = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
         });
     }
     catch (error) {
+        if ((error === null || error === void 0 ? void 0 : error.code) == 11000) {
+            return res.status(400).json({
+                success: false,
+                message: "This ISBN number is already exist!",
+                error,
+            });
+        }
         next(error);
     }
 });
@@ -29,12 +36,11 @@ exports.createBook = createBook;
 const getBooks = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const filter = req.query.filter ? { genre: req.query.filter } : {};
-        const sortBy = req.query.sortBy;
-        const sort = req.query.sort === "asc" ? 1 : -1;
-        const limit = parseInt(req.query.limit) || 10;
-        const books = yield book_model_1.Book.find(filter)
-            .sort({ [sortBy]: sort })
-            .limit(limit);
+        // const sortBy = req.query.sortBy as string;
+        // const sort = req.query.sort === "asc" ? 1 : -1;
+        // const limit = parseInt(req.query.limit as string) || 10;
+        const books = yield book_model_1.Book.find(filter).sort({ createdAt: -1 });
+        // .limit(limit);
         res.status(200).json({
             success: true,
             message: "Books retrieved successfully",
@@ -65,28 +71,16 @@ const updateSingleBooks = (req, res, next) => __awaiter(void 0, void 0, void 0, 
     try {
         const bookId = req.params.bookId;
         const body = req.body;
-        console.log(body);
         const book = yield book_model_1.Book.findById(bookId);
-        // const updatedDoc = {
-        //   _id: book?._id,
-        //   title: body?.title || book?.title,
-        //   author: body?.author || book?.author,
-        //   genre: body?.genre || book?.genre,
-        //   isbn: body?.isbn || book?.isbn,
-        //   description: body?.description || book?.description,
-        //   copies: body?.copies || book?.copies,
-        //   available: body?.available || book?.available,
-        //   createdAt: body?.createdAt,
-        //   updatedAt: body?.updatedAt,
-        // };
         const updatedDoc = Object.assign(Object.assign({}, book === null || book === void 0 ? void 0 : book.toObject()), body);
-        const data = yield book_model_1.Book.findOneAndUpdate({ _id: bookId }, updatedDoc, {
+        const data = yield book_model_1.Book.updateOne({ _id: bookId }, updatedDoc, {
             new: true,
             runValidators: true,
         });
+        console.log(data);
         res.status(200).json({
             success: true,
-            message: "Books updated  successfully",
+            message: "Book updated  successfully",
             data: data,
         });
     }
@@ -98,6 +92,7 @@ exports.updateSingleBooks = updateSingleBooks;
 const deleteSingleBooks = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const bookId = req.params.bookId;
+        console.log("server a book id", bookId);
         const data = yield book_model_1.Book.findOneAndDelete({ _id: bookId });
         if (data) {
             res.status(200).json({

@@ -1,3 +1,4 @@
+import cors from "cors";
 import express, { Application } from "express";
 import {
   createBook,
@@ -8,8 +9,15 @@ import {
 } from "./app/controllers/books.controller";
 import { createBorrow, getBorrow } from "./app/controllers/borrows.controller";
 import globalErrorHandler from "./app/middlewares/globalErrorHandler";
-
 const app: Application = express();
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://library-management-client-lac.vercel.app",
+    ],
+  })
+);
 
 const router = express.Router();
 
